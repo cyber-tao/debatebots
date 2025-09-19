@@ -57,7 +57,7 @@ export class OpenAiService extends AiService {
           totalTokens: response.data.usage.total_tokens
         } : undefined
       };
-    } catch (error) {
+    } catch (error: any) {
       console.error('OpenAI API Error:', error);
       throw new Error(`OpenAI API Error: ${error.response?.data?.error?.message || error.message}`);
     }
@@ -105,7 +105,7 @@ export class AnthropicService extends AiService {
           totalTokens: response.data.usage.input_tokens + response.data.usage.output_tokens
         } : undefined
       };
-    } catch (error) {
+    } catch (error: any) {
       console.error('Anthropic API Error:', error);
       throw new Error(`Anthropic API Error: ${error.response?.data?.error?.message || error.message}`);
     }
@@ -140,7 +140,7 @@ export class CustomService extends AiService {
         content: response.data.content || response.data.response || '',
         usage: response.data.usage
       };
-    } catch (error) {
+    } catch (error: any) {
       console.error('Custom API Error:', error);
       throw new Error(`Custom API Error: ${error.response?.data?.error || error.message}`);
     }

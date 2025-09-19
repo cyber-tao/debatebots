@@ -22,7 +22,7 @@ export abstract class AiService {
     return `${instructions}\n\nContext: ${context}\n\nPlease respond to: ${prompt}`;
   }
 
-  protected enforceWordLimit(content: string, maxWords: number): string {
+  public enforceWordLimit(content: string, maxWords: number): string {
     const words = content.trim().split(/\s+/);
     if (words.length <= maxWords) {
       return content;
@@ -32,7 +32,7 @@ export abstract class AiService {
     return truncated + '...';
   }
 
-  protected countWords(text: string): number {
+  public countWords(text: string): number {
     return text.trim().split(/\s+/).filter(word => word.length > 0).length;
   }
 }

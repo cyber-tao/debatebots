@@ -115,7 +115,7 @@ export class DebateEngine extends EventEmitter {
 
     try {
       await this.runDebateLoop();
-    } catch (error) {
+    } catch (error: any) {
       console.error('Debate error:', error);
       this.session.status = 'cancelled';
       await database.run(

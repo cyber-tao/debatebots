@@ -557,10 +557,10 @@ class DebateController {
       markdown += `## Judge Scores\n\n`;
       
       // Calculate totals
-      const proScores = scores.filter(s => s.stance === 'pro');
-      const conScores = scores.filter(s => s.stance === 'con');
-      const proTotal = proScores.reduce((sum, s) => sum + s.score, 0);
-      const conTotal = conScores.reduce((sum, s) => sum + s.score, 0);
+      const proScores = scores.filter((s: any) => s.stance === 'pro');
+      const conScores = scores.filter((s: any) => s.stance === 'con');
+      const proTotal = proScores.reduce((sum: number, s: any) => sum + s.score, 0);
+      const conTotal = conScores.reduce((sum: number, s: any) => sum + s.score, 0);
       
       markdown += `### Final Results\n\n`;
       markdown += `- **PRO Total Score**: ${proTotal}\n`;

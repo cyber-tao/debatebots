@@ -1,9 +1,8 @@
-// Core type definitions for the debate platform
+// Frontend types (matches backend types)
 export interface ApiConfig {
   id: string;
   name: string;
   provider: 'openai' | 'anthropic' | 'google' | 'custom';
-  apiKey: string;
   baseUrl?: string;
   model: string;
   parameters: {
@@ -22,6 +21,8 @@ export interface AiParticipant {
   id: string;
   name: string;
   apiConfigId: string;
+  apiConfigName?: string;
+  model?: string;
   stance: 'pro' | 'con';
   personality: string;
   instructions: string;
@@ -32,6 +33,8 @@ export interface Judge {
   id: string;
   name: string;
   apiConfigId: string;
+  apiConfigName?: string;
+  model?: string;
   criteria: string[];
   instructions: string;
   isActive: boolean;
@@ -57,6 +60,8 @@ export interface DebateMessage {
   id: string;
   sessionId: string;
   participantId: string;
+  participantName?: string;
+  stance?: 'pro' | 'con';
   round: number;
   turn: number;
   content: string;
@@ -68,34 +73,15 @@ export interface JudgeScore {
   id: string;
   sessionId: string;
   judgeId: string;
+  judgeName?: string;
   participantId: string;
+  participantName?: string;
+  stance?: 'pro' | 'con';
   criteria: string;
   score: number;
   maxScore: number;
   comments: string;
   timestamp: Date;
-}
-
-export interface DebateResult {
-  sessionId: string;
-  winner: 'pro' | 'con' | 'tie';
-  totalScores: {
-    pro: number;
-    con: number;
-  };
-  judgeScores: JudgeScore[];
-  summary: string;
-  completedAt: Date;
-}
-
-// API Request/Response types
-export interface CreateDebateRequest {
-  topic: string;
-  description?: string;
-  participantIds: string[];
-  judgeIds: string[];
-  maxRounds: number;
-  maxWordsPerTurn: number;
 }
 
 export interface ApiResponse<T = any> {
@@ -105,16 +91,36 @@ export interface ApiResponse<T = any> {
   message?: string;
 }
 
-// WebSocket message types
-export interface WebSocketMessage {
-  type: 'debate_update' | 'new_message' | 'session_status' | 'error' | 'pong' | 'subscribed' | 'unsubscribed';
-  payload: any;
+export interface CreateDebateRequest {
+  topic: string;
+  description?: string;
+  participantIds: string[];
+  judgeIds: string[];
+  maxRounds: number;
+  maxWordsPerTurn: number;
 }
 
-export interface DebateUpdatePayload {
-  sessionId: string;
-  status: DebateSession['status'];
-  currentRound: number;
-  currentTurn: number;
-  message?: DebateMessage;
+// UI-specific types
+export interface NavItem {
+  name: string;
+  href: string;
+  icon?: any;
+  current?: boolean;
+}
+
+export interface FormField {
+  name: string;
+  label: string;
+  type: 'text' | 'textarea' | 'select' | 'number' | 'checkbox';
+  required?: boolean;
+  placeholder?: string;
+  options?: { value: string; label: string }[];
+}
+
+export interface ToastMessage {
+  id: string;
+  type: 'success' | 'error' | 'warning' | 'info';
+  title: string;
+  message?: string;
+  duration?: number;
 }

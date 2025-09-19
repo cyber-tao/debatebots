@@ -72,6 +72,7 @@ export class ApiConfigController {
         id: config.id,
         name: config.name,
         provider: config.provider,
+        apiKey: '***', // Hide API key in list
         baseUrl: config.base_url,
         model: config.model,
         parameters: JSON.parse(config.parameters),
@@ -118,6 +119,7 @@ export class ApiConfigController {
         id: config.id,
         name: config.name,
         provider: config.provider,
+        apiKey: '***', // Hide API key
         baseUrl: config.base_url,
         model: config.model,
         parameters: JSON.parse(config.parameters),
