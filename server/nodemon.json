@@ -1,0 +1,12 @@
+{
+  "extends": [
+    "dev",
+    "restart",
+    "ignore"
+  ],
+  "watch": [
+    "src"
+  ],
+  "ext": "ts",
+  "exec": "ts-node src/index.ts"
+}
